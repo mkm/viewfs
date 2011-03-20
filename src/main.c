@@ -280,6 +280,16 @@ static struct fuse_operations view_operations = {
 };
 
 int main(int argc, char** argv) {
+  char* base_dir;
+
+  if (argc > 2) {
+    base_dir = argv[argc - 2];
+    argv[argc - 2] = argv[argc - 1];
+    argc -= 1;
+  } else {
+    base_dir = "/";
+  }
+  
   log_file = open(LOG_FILE, O_CREAT | O_TRUNC | O_WRONLY);
   if (log_file < 0) {
     exit(42);
