@@ -1,3 +1,4 @@
+#include <fuse.h>
 #include <stdlib.h>
 
 #include "file_state.h"
@@ -27,6 +28,10 @@ static fstate_t* find_state(fstate_table_t* table, int fh) {
   return NULL;
 }
 
+internal_t* get_internal() {
+  return fuse_get_context()->private_data;
+}
+
 fstate_table_t* create_table() {
   fstate_table_t* table;
 
@@ -35,6 +40,8 @@ fstate_table_t* create_table() {
   table->states_len = 1;
   table->states = malloc(sizeof(fstate_t));
   table->states[0].fh = FILE_FH_NOT_PRESENT;
+
+  return table;
 }
 
 fstate_t* create_state(fstate_table_t* table, int fh) {
