@@ -1,0 +1,7 @@
+#!/bin/bash
+
+device="$1"
+mountpoint="$2"
+options="$4"
+
+exec viewfs -o "$options" "$device" "$mountpoint"
