@@ -115,7 +115,7 @@ static int view_getattr_special(const char* path, struct stat* statbuffer) {
     close(ret);
   }
   statbuffer->st_size = file_data.length;
-  deinit(&file_data);
+  deinit_buffer(&file_data);
   return 0;
 }
 
